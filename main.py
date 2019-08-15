@@ -1,5 +1,6 @@
 import telebot
 from telebot import types
+from webscript import WebParser
 bot = telebot.TeleBot("699738404:AAFNmDZck9wMMdJY9biysPjuMnQHAhNZHCg")
 
 colour = 0
@@ -63,6 +64,9 @@ def callback_worker(call):
         wr = str(name) + " added " + str(money) + " " + str(colour)
         f.write(wr + '\n')
         f.close()
+        ses = WebParser.authentication(logs=True)
+        WebParser.upload_file(session=ses, path="lsh-bot/", file="datesofeverybody.txt")
+        
     elif call.data == "orange" and k == 0:
         bot.send_message(call.message.chat.id, 'Ставка на оранжевое успешно принята в обработку! Вы в игре!')
         k+=1
@@ -71,6 +75,8 @@ def callback_worker(call):
         wr = str(name) + " added " + str(money) + " " + str(colour)
         f.write(wr + '\n')
         f.close()
+        ses = WebParser.authentication(logs=True)
+        WebParser.upload_file(session=ses, path="lsh-bot/", file="datesofeverybody.txt")
     elif k >= 1:
         bot.send_message(call.message.chat.id, "Надо начать сначала( /start ?")
 
